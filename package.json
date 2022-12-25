@@ -44,5 +44,7 @@
     "url": "https://github.com/Kwonkunkun/cuss-word-filter-ko/issues",
     "email": "kunwoo242@gmail.com"
   },
-  "license": "ISC"
+  "repository": "https://github.com/Kwonkunkun/cuss-word-filter-ko",
+  "homepage": "https://github.com/Kwonkunkun/cuss-word-filter-ko",
+  "license": "MIT"
 }
