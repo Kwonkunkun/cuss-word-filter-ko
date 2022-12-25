@@ -1,15 +1,14 @@
 {
   "name": "cuss-word-filter-ko",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "한국어 욕을 filtering 하는 모듈",
+  "main": "dist/cussWordFilter.js",
+  "types": "dist/cussWordFilter.d.ts",
   "scripts": {
+    "build": "tsc --project tsconfig.build.json",
     "release": "release-it",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
@@ -26,5 +25,24 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "keywords": [
+    "cuss",
+    "bad",
+    "word",
+    "words",
+    "projanity",
+    "filter",
+    "cuss-word-filter"
+  ],
+  "author": {
+    "name": "Kwonkunkun",
+    "email": "kunwoo242@gmail.com",
+    "url": "https://github.com/Kwonkunkun/cuss-word-filter-ko"
+  },
+  "bugs": {
+    "url": "https://github.com/Kwonkunkun/cuss-word-filter-ko/issues",
+    "email": "kunwoo242@gmail.com"
+  },
+  "license": "ISC"
 }
