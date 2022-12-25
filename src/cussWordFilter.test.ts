@@ -18,7 +18,7 @@ const EXPECTED_FILTERED_CUSS_WORD_LIST = [
 describe('cussWordFilter', () => {
     let cussWordFilter: CussWordFilter;
     beforeEach(() => {
-        cussWordFilter = new CussWordFilter();
+        cussWordFilter = new CussWordFilter({});
     });
     it('filter', () => {
         CUSS_WORD_LIST.forEach((cussWord, index) => {
