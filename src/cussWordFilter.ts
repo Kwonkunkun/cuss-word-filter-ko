@@ -56,6 +56,19 @@ export class CussWordFilter {
     }
 
     /**
+     * @param text
+     * @description cussWords 에 포함된 문장인지 여부를 반환하는 함수
+     */
+    public isCussWord(text: string): boolean {
+        for(const cussWord of this.cussWords) {
+            if(text.includes(cussWord)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @private
      * @param text 필터링할 텍스트
      * @param replacement 필터링된 텍스트를 대체할 문자
@@ -69,7 +82,7 @@ export class CussWordFilter {
      * @param words 중복을 제거할 단어 목록
      * @description 중복을 제거한 단어 목록을 반환하는 함수
      */
-    private getNotDuplicatedWords(words: string[]){
+    private getNotDuplicatedWords(words: string[]) {
         const result: string[] = [];
         words.forEach((word) => {
             if (!result.includes(word)) {
