@@ -18,6 +18,12 @@ type CussWordFilterOptions = {
      * @description default cussWords 와 constructor option 에서 전달된 cussWords 를 합칠지 여부
      */
     mergeDefaultData?: boolean;
+
+    /**
+     * @default []
+     * @description 필터링을 제외할 단어들
+     */
+    whiteList?: string[];
 }
 
 /**
@@ -32,6 +38,7 @@ type CussWordFilterOptions = {
 export class CussWordFilter {
     private readonly cussWords: string[];
     private readonly replacement: string;
+    private readonly whiteList: string[];
 
     /**
      * @default 기본 욕 필터링 목록 (./cuss-word-list.json)
@@ -39,9 +46,10 @@ export class CussWordFilter {
      * @description CussWordFilter 를 생성하는 생성자
      */
     constructor(option: CussWordFilterOptions) {
-        const {cussWords = DEFAULT_CUSS_WORDS, replacement = '*', mergeDefaultData = false} = option;
+        const {cussWords = DEFAULT_CUSS_WORDS, replacement = '*', mergeDefaultData = false, whiteList = []} = option;
         this.cussWords = mergeDefaultData ? this.getNotDuplicatedWords([...DEFAULT_CUSS_WORDS, ...cussWords]) : cussWords;
         this.replacement = replacement;
+        this.whiteList = whiteList;
     }
 
     /**
@@ -51,17 +59,24 @@ export class CussWordFilter {
     public filter(text: string): string {
         return text
             .split(' ')
-            .map(word => this.cussWords.includes(word) ? this.getReplaceText(word, this.replacement) : word)
+            .map(word =>{
+                // whiteList 에 포함된 텍스트인 경우
+                if(this.isWhiteList(word)) {
+                    return word;
+                }
+
+                return this.cussWords.includes(word) ? this.getReplaceText(word, this.replacement) : word
+            })
             .join(' ');
     }
 
     /**
      * @param text
-     * @description cussWords 에 포함된 문장인지 여부를 반환하는 함수
+     * @description cussWords 에 포함된 문장인지 여부를 반환하는 함수, whiteList 에 포함된 텍스트인 경우 false 를 반환
      */
     public isCussWord(text: string): boolean {
         for(const cussWord of this.cussWords) {
-            if(text.includes(cussWord)) {
+            if(text.includes(cussWord) && !this.isWhiteList(cussWord)) {
                 return true;
             }
         }
@@ -90,5 +105,14 @@ export class CussWordFilter {
             }
         });
         return result;
+    }
+
+    /**
+     * @private
+     * @param text 확인할 텍스트
+     * @description whiteList 에 포함된 텍스트인지 여부를 반환하는 함수
+     */
+    private isWhiteList(text: string): boolean {
+        return this.whiteList.includes(text);
     }
 }

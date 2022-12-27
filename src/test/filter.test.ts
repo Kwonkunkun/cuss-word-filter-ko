@@ -19,4 +19,13 @@ describe('cussWordFilter filter function test', () => {
             expect(cussWordFilter.filter(goodWord)).toBe(goodWord);
         });
     });
+
+    it('whiteList 에 추가한 단어는 필터링에서 제외되는가?', () => {
+        //cussWord 에 존재하는 단어인지 확인
+        expect(cussWordFilter.isCussWord('개색햐')).toBeTruthy();
+        //whiteList 에 '개색햐'를 추가
+        cussWordFilter = new CussWordFilter({whiteList: ['개색햐']});
+        //whiteList 에 추가한 단어는 필터링에서 제외되는지 확인
+        expect(cussWordFilter.filter('개색햐')).toBe('개색햐');
+    });
 });
