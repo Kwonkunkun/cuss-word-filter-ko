@@ -32,6 +32,12 @@ type CussWordFilterOptions = {
      * @description default cussWords 와 constructor option 에서 전달된 cussWords 를 합칠지 여부
      */
     mergeDefaultData?: boolean;
+
+    /**
+     * @default []
+     * @description 필터링을 제외할 단어들, isCussWord, filter method 에서 적용됨
+     */
+    whiteList?: string[];
 }
 ```
 
@@ -54,14 +60,16 @@ const filter = new CussWordFilter({});
 console.log(filter.filter("ㅅㅂ 놈아")); // ** 놈아
 ```
 
+## Test Coverage
+
+<img width="666" alt="image" src="https://user-images.githubusercontent.com/59603575/209641360-d737fc6f-0d3a-4560-ae4d-04c0a0a6533d.png">
+
 ## Contributing
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+Contributions, issues and feature requests are welcome!
 
 ## License
 
 MIT
 
 ---
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
